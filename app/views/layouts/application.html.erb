@@ -28,33 +28,64 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <% if current_user %>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search your wikis">
         </div>
         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
       </form>
+      <% end %>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "About", 'https://github.com/austinarchibald/blocmetrics', target: '_blank' %></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-            <span class="fa-stack">
-              <i class="fa fa-square-o fa-stack-2x"></i>
-              <i class="fa fa-user fa-stack-1x"></i>
-            </span>
-            <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+
+        <% if current_user %>
+          <li><%= link_to edit_user_registration_path do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <%= (current_user.name || current_user.email) %>
+            <% end %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+              <span class="fa-stack">
+                <i class="fa fa-square-o fa-stack-2x"></i>
+                <i class="fa fa-user fa-stack-1x"></i>
+              </span>
+              <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><%= link_to 'Sign out', destroy_user_session_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+
+            <% else %>
+              <li><%= link_to "About", 'https://github.com/austinarchibald/blocmetrics', target: '_blank' %></li>
+              <li><%= link_to "Sign in", new_user_session_path %></li>
+          </li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:error] %>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:error] %>
+    </div>
+  <% elsif flash[:alert] %>
+      <div class="alert alert-warning">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+</div>
 
 <%= yield %>
 
