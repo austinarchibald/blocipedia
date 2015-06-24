@@ -1,0 +1,17 @@
+<div class="the-box col-xs-8 col-xs-offset-2">
+  <h1>
+   <%= @wiki.title %>
+   <% if @wiki.private %>
+   &nbsp;&nbsp;<i class="fa fa-exclamation-circle"></i>
+   <% end %>
+  </h1>
+  <p>
+    <%= @wiki.body %>
+  </p>
+  <br /><br />
+  <center>
+  <%= link_to "Edit Wiki", edit_wiki_path, class: 'btn btn-success' %>&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure? Decision irreversible." }  %>&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+  </center>
+</div>

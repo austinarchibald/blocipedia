@@ -144,7 +144,7 @@ body {
   text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h4, h5, h6 {
   text-align: center;
 }
 
@@ -156,4 +156,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 20%;
   margin-right: 20%;
   float:none;
+}
+
+.checkbox {
+  color: red;
+}
+
+.fa-exclamation-circle {
+  color: red;
 }
