@@ -1,12 +1,12 @@
 <div class="the-box col-xs-8 col-xs-offset-2">
   <h1>
-   <%= @wiki.title %>
+   <%= markdown_to_html @wiki.title %>
    <% if @wiki.private %>
    &nbsp;&nbsp;<i class="fa fa-exclamation-circle"></i>
    <% end %>
   </h1>
   <p>
-    <%= @wiki.body %>
+    <%= markdown_to_html @wiki.body %>
   </p>
   <br /><br />
   <center>
