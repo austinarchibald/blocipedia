@@ -37,12 +37,6 @@ class ChargesController < ApplicationController
 
   private
 
-  def downgrade
-    current_user.update_attribute(:role, 'free')
-    flash[:notice] = "You have successfully downgraded."
-    redirect_to new_charge_path
-  end
-
   class Amount
     def self.default
       15_00

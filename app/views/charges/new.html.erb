@@ -8,7 +8,7 @@
   <% end %>
   <% if current_user.role == 'premium' %>
     <h2>Downgrade to Free</h2><br /><br />
-    <%= link_to 'Downgrade', charge_path(current_user), method: 'patch', class: 'btn btn-danger', data: { confirm: "Are you sure?" } %>
+    <%= link_to 'Downgrade', charge_path(current_user), method: 'patch', class: 'btn btn-danger', data: { confirm: "Are you sure? Your private wikis will become public." } %>
   <% end %>
   <% if current_user.role == 'admin' %>
     <h2>You're an admin</h2>

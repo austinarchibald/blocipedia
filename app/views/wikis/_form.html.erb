@@ -21,11 +21,13 @@
     <%= f.text_area :body, rows: 15, class: 'form-control', placeholder: "Wiki Body" %>
   <% end %>
 
+  <% if current_user.role == 'admin' || current_user.role == 'premium' %>
   <div class="form-group checkbox">
     <%= f.label :private, class: 'checkbox' do %>
       <%= f.check_box :private %> Private?
     <% end %>
   </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.submit "Save", class: 'btn btn-success' %>
