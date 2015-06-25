@@ -10,8 +10,12 @@
   </p>
   <br /><br />
   <center>
-  <%= link_to "Edit Wiki", edit_wiki_path, class: 'btn btn-success' %>&nbsp;&nbsp;&nbsp;&nbsp;
-  <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure? Decision irreversible." }  %>&nbsp;&nbsp;&nbsp;&nbsp;
-  <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+  <%= link_to "Edit Wiki", edit_wiki_path, class: 'btn btn-success' if policy(@wiki).edit? %>&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure? Decision irreversible." } if policy(@wiki).destroy? %>&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' if policy(Wiki.new).create? %>
   </center>
+  <% if !current_user %>
+    <hr>
+    <small><%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-success btn-sm' %> to edit this wiki!</small>
+  <% end %>
 </div>

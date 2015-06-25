@@ -1,4 +1,4 @@
-<div class="the-box col-xs-6 col-xs-offset-3">
+<div class="the-box col-xs-10 col-xs-offset-1">
   <ol>
     <% @wikis.each do |wiki| %>
       <h3><li><%= link_to wiki.title, wiki %></li></h3>
@@ -6,6 +6,6 @@
   </ol>
   <hr>
   <div class="col-xs-4">
-    <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+    <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' if policy(Wiki.new).create? %>
   </div>
 </div>

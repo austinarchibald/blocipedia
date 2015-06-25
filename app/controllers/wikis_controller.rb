@@ -9,10 +9,12 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
+    authorize @wiki
   end
 
   def create
     @wiki = current_user.wikis.build(wiki_params)
+    authorize @wiki
     if @wiki.save
       redirect_to @wiki, notice: "Wiki created."
 
@@ -23,10 +25,12 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def update
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
     if @wiki.update_attributes(wiki_params)
       redirect_to @wiki
     else
@@ -37,6 +41,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = current_user.wikis.find(params[:id])
+    authorize @wiki
     if @wiki.destroy
       flash[:notice] = "Wiki deleted."
       redirect_to wikis_path
