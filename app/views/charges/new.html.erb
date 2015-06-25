@@ -1,0 +1,17 @@
+<div class="the-box col-xs-6 col-xs-offset-3">
+  <center>
+  <% if current_user.role == 'free' %>
+    <%= form_tag charges_path do %>
+      <h2>Upgrade to Premium</h2> <br /><br />
+      <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= @stripe_btn_data[:amount] %> data-description="<%= @stripe_btn_data[:description] %>" ></script>
+    <% end %>
+  <% end %>
+  <% if current_user.role == 'premium' %>
+    <h2>Downgrade to Free</h2><br /><br />
+    <%= link_to 'Downgrade', charge_path(current_user), method: 'patch', class: 'btn btn-danger', data: { confirm: "Are you sure?" } %>
+  <% end %>
+  <% if current_user.role == 'admin' %>
+    <h2>You're an admin</h2>
+  <% end %>
+  </center>
+</div>

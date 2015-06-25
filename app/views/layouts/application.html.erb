@@ -51,8 +51,13 @@
               </span>
               <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
+              <li><%= link_to "View the Wikis", wikis_path %></li>
+              <% if current_user.role == 'free' %>
+                <li><%= link_to 'Upgrade Account', new_charge_path %></li>
+              <% end %>
+              <% if current_user.role == 'premium' %>
+                <li><%= link_to 'Downgrade Account', new_charge_path %></li>
+              <% end %>
               <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>

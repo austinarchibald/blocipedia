@@ -39,6 +39,19 @@
     </div>
   <% end %>
 
+  <hr>
+  <center>
+  <h3>Subscription</h3>
+  <% if current_user.role == 'free' %>
+    <%= link_to 'Upgrade', new_charge_path, class: 'btn btn-success' %>
+  <% end %>
+
+  <% if current_user.role == 'premium' %>
+    <%= link_to 'Downgrade', new_charge_path, class: 'btn btn-danger' %>
+  <% end %>
+  </center>
+  <hr>
+
   <h4>Delete your account?</h4>
 
   <p>(Please dont) <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
