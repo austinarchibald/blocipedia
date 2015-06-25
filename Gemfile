@@ -36,6 +36,7 @@ gem 'font-awesome-sass', '~> 4.3.0'
 gem 'figaro'
 gem 'devise'
 gem 'pundit'
+gem 'faker'
 
 
 group :development, :test do

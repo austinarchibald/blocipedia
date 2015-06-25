@@ -165,3 +165,12 @@ h1, h2, h4, h5, h6 {
 .fa-exclamation-circle {
   color: red;
 }
+
+.private {
+  opacity: 0;
+  font-size: 10px;
+}
+
+.fa-exclamation-circle:hover .private {
+  opacity: 1;
+}

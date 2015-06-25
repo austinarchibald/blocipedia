@@ -1,7 +1,12 @@
 <div class="the-box col-xs-10 col-xs-offset-1">
   <ol>
     <% @wikis.each do |wiki| %>
-      <h3><li><%= link_to wiki.title, wiki %></li></h3>
+      <h3><li>
+        <%= link_to wiki.title, wiki %>
+        <% if wiki.private %>
+          &nbsp;&nbsp;<i class="fa fa-exclamation-circle"> <span class="private">Private</span></i>
+        <% end %>
+      </li></h3>
     <% end %>
   </ol>
   <hr>
