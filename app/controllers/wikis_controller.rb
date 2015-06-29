@@ -1,7 +1,6 @@
 class WikisController < ApplicationController
   def index
     @wikis = policy_scope(Wiki)
-    authorize @wikis
   end
 
   def show
@@ -27,6 +26,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.all
     authorize @wiki
   end
 
