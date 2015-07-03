@@ -1,0 +1,62 @@
+<%= form_for @wiki do |f| %>
+
+  <% if @wiki.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>There are <%= pluralize(wiki.errors.count, "error") %>.</h4>
+    <ul>
+      <% @wiki.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <%= form_group_tag(@wiki.errors[:title]) do %>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control', placeholder: "Wiki Title" %>
+  <% end %>
+
+  <%= form_group_tag(@wiki.errors[:body]) do %>
+    <%= f.label :body %>
+    <%= f.text_area :body, rows: 15, class: 'form-control', placeholder: "Wiki Body" %>
+  <% end %>
+
+  <% if current_user.role == 'admin' || current_user.role == 'premium' %>
+  <div class="form-group checkbox">
+    <%= f.label :private, class: 'checkbox' do %>
+      <%= f.check_box :private %> Private?
+      <%=  %>
+    <% end %>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.submit "Save", class: 'btn btn-success' %>
+    <%= f.submit 'Cancel', class: 'btn btn-danger pull-right'  %>
+  </div>
+
+<% end %>
+
+<% if current_user.role == 'admin' || current_user.role == 'premium' %>
+  <h4>Collaborators</h4>
+  <table class="table">
+    <thead>
+      <th>Email</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td>
+            <% if @wiki.users.include? user %>
+              <%= link_to '<i class="fa fa-minus-circle"></i>'.html_safe, wiki_collaborator_path(@wiki, user.id), method: :delete, class: 'btn btn-danger'%>
+            <% else %>
+              <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, wiki_collaborators_path(@wiki, user_id: user.id), method: :post, class: 'btn btn-success' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
